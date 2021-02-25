@@ -1,0 +1,19 @@
+input {
+    background-color: whitesmoke;
+    color: black;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    border: none;
+    outline: none;
+    position: relative;
+    margin: 5px;
+    height:0.7rem;
+  }
+
+.ran-out{
+    background-color: red;
+}
+
+.have{
+    background-color: green;
+}
