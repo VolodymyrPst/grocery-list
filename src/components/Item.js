@@ -1,17 +1,18 @@
 import React from "react";
-import './Item.css'
 
-const Item = ({ id, item, list, setList, complete, status }) => {
+const Item = ({ id, item, list, setList, complete, status, date, setTime}) => {
   const remove = (id) => {
     setList(list.filter((el) => el.id !== id));
   };
 
   const handleStatus = (id) => {
+    
     setList(
       list.map((item) => {
         if (item.id === id) {
           return {
             ...item,
+            date: setTime(),
             complete: !item.complete,
             status: (item.complete ? 'have' : 'ran out')
           };
@@ -22,13 +23,13 @@ const Item = ({ id, item, list, setList, complete, status }) => {
   };
 
   const handleItem = (e) => {
-    if (e.target.value.length <= 25) {
+    if (e.target.value.length <= 2 && e.target.value.length <= 20) {
       setList(
         list.map((el) => {
           if (el.id === id) {
             return {
               ...el,
-
+              date: setTime(),
               item: e.target.value,
             };
           }
@@ -40,22 +41,18 @@ const Item = ({ id, item, list, setList, complete, status }) => {
   };
 
   return (
-    <div className="item">
+    <div>
       <input
         type="text"
         value={item}
-        style={{
-          // border: "none",
-          // outline: "none",
-          // backgroundColor: "transparent",
-          
-          // fontSize: "20px",
-        }}
         onChange={handleItem}
-        className={item.complete ? 'have' : 'ran-out'}
       />
       <button onClick={() => handleStatus(id)}>{status}</button>
-      <button onClick={() => remove(id)}>Delete</button>
+      <button
+        style={{border:' 2px solid red'}}
+        onClick={() => remove(id)}
+        >Delete</button>
+      <p>Last changes: {date}</p>
     </div>
   );
 };
